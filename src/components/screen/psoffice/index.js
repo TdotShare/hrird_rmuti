@@ -4,7 +4,6 @@ import API from "../../../config/api"
 import axios from 'axios'
 import Navigation from '../../../config/navigation'
 import { useHistory } from "react-router-dom";
-//import swal from '../../../utils/swal'
 
 function Index(props) {
 
@@ -32,9 +31,8 @@ function Index(props) {
     }
 
 
-    const actionView = (id) => {
-        history.push(`/system/${Navigation.PagePSoffice}/${id}`)
-        //swal.actionInfo("กำลังพัฒนาระบบ ดูประวัติของบุคลากร สามาใช้งานได้เร็วๆ นี้")
+    const actionView = (item) => {
+        history.push(`/system/${Navigation.PagePSoffice}/${item.account_id}`)
     }
 
     useEffect(() => {
@@ -82,7 +80,7 @@ function Index(props) {
                                                                                 alt={`${item.pic_path}`} />
                                                                         </a>
                                                                         <br />
-                                                                        <span onClick={() => actionView(item.id)} >{item.fullname}  <br /> {item.position}</span>
+                                                                        <span onClick={() => actionView(item)} >{item.fullname}  <br /> {item.position}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
