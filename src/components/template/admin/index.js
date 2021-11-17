@@ -13,8 +13,8 @@ function Index(props) {
 
     const authenticate = useSelector(state => state.user.authenticate)
 
-    const title_brmb = useSelector(state => state.breadcrumb.title)
-    const path_brmb = useSelector(state => state.breadcrumb.path)
+    //const title_brmb = useSelector(state => state.breadcrumb.title)
+    //const path_brmb = useSelector(state => state.breadcrumb.path)
 
     const actionLogout = () => {
         props.deleteUser()
@@ -34,7 +34,7 @@ function Index(props) {
                         <Link className="nav-link" data-widget="pushmenu" to="#" role="button"><i className="fas fa-bars" /></Link>
                     </li>
                     <li className="nav-item d-none d-sm-inline-block">
-                        <Link to={`${Navigation.PagePSoffice}`} className="nav-link">หน้าหลัก</Link>
+                        <Link to={`/system/${Navigation.PagePSoffice}`} className="nav-link">หน้าหลัก</Link>
                     </li>
                     <li className="nav-item d-none d-sm-inline-block">
                         {

@@ -1,10 +1,10 @@
-import React , { useEffect , useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import API from "../../../config/api"
 import axios from 'axios'
 import Navigation from '../../../config/navigation'
 import { useHistory } from "react-router-dom";
-import swal from '../../../utils/swal'
+//import swal from '../../../utils/swal'
 
 function Index(props) {
 
@@ -32,8 +32,9 @@ function Index(props) {
     }
 
 
-    const actionView = () => {
-        swal.actionInfo("กำลังพัฒนาระบบ ดูประวัติของบุคลากร สามาใช้งานได้เร็วๆ นี้")
+    const actionView = (id) => {
+        history.push(`/system/${Navigation.PagePSoffice}/${id}`)
+        //swal.actionInfo("กำลังพัฒนาระบบ ดูประวัติของบุคลากร สามาใช้งานได้เร็วๆ นี้")
     }
 
     useEffect(() => {
@@ -73,13 +74,15 @@ function Index(props) {
                                                     el.data.map((item, i) => {
                                                         return (
                                                             <div key={i} className="col-4" style={{ cursor: "pointer", textAlign: 'center', paddingBottom: "1%" }}>
-                                                                <div onClick={() => actionView()} className={`card  ${item.headdraw === 1 ? "bg-secondary" : "bg-light"}`}>
+                                                                <div className={`card  ${item.headdraw === 1 ? "bg-secondary" : "bg-light"}`}>
                                                                     <div className="card-body">
-                                                                        <img className={`img-fluid img-thumbnail`} style={{ width: `40%` }}
-                                                                            src={`https://www.mis-ird.rmuti.ac.th/evaluation/upload/profile/thumb/${item.pic_path}/${item.pic_name}`}
-                                                                            alt={`${item.pic_path}`} />
+                                                                        <a rel="noreferrer" target="_blank" href={`https://www.mis-ird.rmuti.ac.th/evaluation/upload/profile/full/${item.pic_path}/${item.pic_name}`} >
+                                                                            <img className={`img-fluid img-thumbnail`} style={{ width: `40%` }}
+                                                                                src={`https://www.mis-ird.rmuti.ac.th/evaluation/upload/profile/thumb/${item.pic_path}/${item.pic_name}`}
+                                                                                alt={`${item.pic_path}`} />
+                                                                        </a>
                                                                         <br />
-                                                                        <span>{item.fullname}  <br /> {item.position}</span>
+                                                                        <span onClick={() => actionView(item.id)} >{item.fullname}  <br /> {item.position}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>

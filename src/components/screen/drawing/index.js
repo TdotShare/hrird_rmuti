@@ -38,7 +38,7 @@ function Index(props) {
 
 
                 if (res.data.status === "Unauthorized") {
-                    history.push(Navigation.PageLogin)
+                    history.replace(Navigation.PageLogin)
                     return
                 }
 
