@@ -8,6 +8,7 @@ import TemplateIndex from '../components/template/admin/index'
 import LoginScreen from '../components/auth/login/index'
 
 import PsofficeScreen from '../components/screen/psoffice/index'
+import PsofficeViewScreen from '../components/screen/psoffice/view'
 
 
 import DrawingScreen from '../components/screen/drawing/index'
@@ -25,9 +26,6 @@ function Index(props) {
     ])
 
 
-
-
-
     return (
 
         <Router basename={`/hr`} >
@@ -39,6 +37,7 @@ function Index(props) {
                     <Switch>
                         <Route exact path={`/system`} component={() => <PsofficeScreen />} />
                         <Route exact path={`/system/${Navigation.PagePSoffice}`} component={() => <PsofficeScreen />} />
+                        <Route exact path={`/system/${Navigation.PagePSoffice}/:id`} component={() => <PsofficeViewScreen />} />
 
 
                         <Route exact path={`/system/${Navigation.PageDrawing}`} component={() => <DrawingScreen />} />
