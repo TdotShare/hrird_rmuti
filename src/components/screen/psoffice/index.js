@@ -50,7 +50,7 @@ function Index(props) {
     return (
         <React.Fragment>
             {
-                data && (
+                data.length !== 0 ?
                     data.map((el, index) => {
                         return (
                             <div key={index} className="row">
@@ -95,7 +95,15 @@ function Index(props) {
                             </div>
                         )
                     })
-                )
+
+                    :
+
+                    <div className="d-flex justify-content-center">
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
             }
         </React.Fragment>
     )

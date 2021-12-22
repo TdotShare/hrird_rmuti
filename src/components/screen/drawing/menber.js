@@ -19,9 +19,6 @@ function Index(props) {
 
     let { id } = useParams();
 
-    if (authenticate) {
-        <Redirect to={Navigation.PageLogin} />
-    }
 
     const actionGet = () => {
         axios.get(`${API}/drawing/view/${id}`, {
@@ -185,6 +182,10 @@ function Index(props) {
         ])
 
     }, [props])
+
+    if (authenticate) {
+        return <Redirect to={Navigation.PageLogin} />
+    }
 
     return (
         <React.Fragment>

@@ -15,10 +15,6 @@ function Index(props) {
     const user = useSelector(state => state.user.data)
     const authenticate = useSelector(state => state.user.authenticate)
 
-    if (authenticate) {
-        <Redirect to={Navigation.PageLogin} />
-    }
-
     useEffect(() => {
         actionGet()
         props.setTitle("จัดเรียงแผนผัง")
@@ -139,6 +135,10 @@ function Index(props) {
                 swal.actionError()
                 console.error(err);
             })
+    }
+
+    if (authenticate) {
+        return <Redirect to={Navigation.PageLogin} />
     }
 
     return (
