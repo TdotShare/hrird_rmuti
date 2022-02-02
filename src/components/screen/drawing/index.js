@@ -137,7 +137,7 @@ function Index(props) {
             })
     }
 
-    if (authenticate) {
+    if (!authenticate) {
         return <Redirect to={Navigation.PageLogin} />
     }
 
