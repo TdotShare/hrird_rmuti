@@ -1,4 +1,4 @@
-import React , { useEffect , useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import axios from "axios"
 import API from "../../../config/api"
@@ -11,6 +11,7 @@ function Index(props) {
     const [drawlistData, setDrawListData] = useState([])
     const [drawingData, setDrawingData] = useState([])
     const [accountData, setAccountData] = useState([])
+    const [loadingData, setLoading] = useState(false)
 
     const history = useHistory();
 
@@ -68,6 +69,9 @@ function Index(props) {
     }
 
     const actionGetAccountPages = (number) => {
+
+        //setLoading(true)
+
         axios.get(`${API}/drawing/view/${id}?page=${number}`, {
             headers: {
                 'Authorization': `Bearer ${user.token}`
@@ -80,7 +84,10 @@ function Index(props) {
                     return
                 }
 
+                console.log(res.data.data.account_list)
+
                 if (res.data.bypass) {
+
                     setAccountData(res.data.data.account_list)
                 }
 
@@ -88,6 +95,10 @@ function Index(props) {
             .catch(err => {
                 console.error(err);
             })
+
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 2000);
     }
 
     const actionInDrawing = (item) => {
@@ -181,7 +192,7 @@ function Index(props) {
             { name: `${drawingData.name ? drawingData.name : id}`, url: null }
         ])
 
-    }, [props])
+    }, [])
 
     if (!authenticate) {
         return <Redirect to={Navigation.PageLogin} />
@@ -250,34 +261,49 @@ function Index(props) {
                         </div>
 
                         <div className="card-body">
-                            <table className="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">ตำแหน่ง</th>
-                                        <th scope="col">ชื่อเล่น</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        accountData.length !== 0 && (
-                                            accountData.data.map((el, index) => {
-                                                return (
-                                                    <tr key={index} >
-                                                        <td>{el.title} {el.firstname} {el.surname}</td>
-                                                        <td>{el.position}</td>
-                                                        <td>{el.nickname}</td>
-                                                        <td><button onClick={() => actionInDrawing(el)} type="submit" className="btn btn-success">นำเข้า</button></td>
-                                                    </tr>
-                                                )
-                                            })
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                            <div style={{ paddingBottom: "1%" }}></div>
 
+                            {
+                                loadingData ?
+
+                                    <div className="d-flex justify-content-center">
+                                        <div className="spinner-border" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+
+                                    :
+
+                                    <>
+                                        <table className="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ชื่อ</th>
+                                                    <th scope="col">ตำแหน่ง</th>
+                                                    <th scope="col">ชื่อเล่น</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    accountData.length !== 0 && (
+                                                        accountData.data.map((el, index) => {
+                                                            return (
+                                                                <tr key={index} >
+                                                                    <td>{el.title} {el.firstname} {el.surname}</td>
+                                                                    <td>{el.position}</td>
+                                                                    <td>{el.nickname}</td>
+                                                                    <td><button onClick={() => actionInDrawing(el)} type="submit" className="btn btn-success">นำเข้า</button></td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    )
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div style={{ paddingBottom: "1%" }}></div>
+
+                                    </>
+                            }
 
 
                             <nav>
@@ -314,6 +340,8 @@ function Index(props) {
                                     </li>
                                 </ul>
                             </nav>
+
+
 
                         </div>
 
