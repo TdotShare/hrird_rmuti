@@ -71,7 +71,7 @@ function Index(props) {
                                                 {
                                                     el.data.map((item, i) => {
                                                         return (
-                                                            <div key={i} className="col-4" style={{ cursor: "pointer", textAlign: 'center', paddingBottom: "1%" }}>
+                                                            <div key={i} className="col-sm-12 col-md-6 col-lg-4" style={{ cursor: "pointer", textAlign: 'center', paddingBottom: "1%" }}>
                                                                 <div className={`card  ${item.headdraw === 1 ? "bg-secondary" : "bg-light"}`}>
                                                                     <div className="card-body">
                                                                         <a rel="noreferrer" target="_blank" href={`https://www.mis-ird.rmuti.ac.th/evaluation/upload/profile/full/${item.pic_path}/${item.pic_name}`} >

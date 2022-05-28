@@ -38,8 +38,6 @@ function Index(props) {
                         <Route exact path={`/system`} component={() => <PsofficeScreen />} />
                         <Route exact path={`/system/${Navigation.PagePSoffice}`} component={() => <PsofficeScreen />} />
                         <Route exact path={`/system/${Navigation.PagePSoffice}/:id`} component={() => <PsofficeViewScreen />} />
-
-
                         <Route exact path={`/system/${Navigation.PageDrawing}`} component={() => <DrawingScreen />} />
                         <Route exact path={`/system/${Navigation.PageDrawing}/:id`} component={() => <DrawingMenberScreen />} />
                         <Route path={`*`} component={() => <Error404Screen />} />
